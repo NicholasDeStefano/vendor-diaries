@@ -1,0 +1,50 @@
+<div class="page-header">
+    <h1>Vendor Diaries</h1>
+</div>
+
+<div ng-repeat="post in posts | orderBy:'-upvotes'">
+    <button type="button" class="close">&times;</button>
+    <button type="button" class="btn btn-link"></button><span class="glyphicon glyphicon-pencil"></span>
+    <a href="{{post.link}}" target="_blank">{{post.title}}</a>
+</div>
+
+<button class="btn btn-default">Add Post</button>
+
+<form ng-submit="addPost()" style="margin-top:30px;" ng-show="isLoggedIn()">
+    <h3>Add a new post</h3>
+
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Link" ng-model="link"></input>
+    </div>
+    <div class="form-group">
+        <select ng-model="categoryChoice">
+          <option value="Analytics">Analytics</option>
+          <option value="Social Media">Social Media</option>
+          <option value="Creative">Creative</option>
+          <option value="Production">Production</option>
+          <option value="Ad Tech">Ad Tech</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Post</button>
+    <button class="btn btn-warning">Cancel</button>
+</form>
+
+<form style="margin-top:30px;" ng-show="isLoggedIn(); editingPost">
+    <h3>Edit post</h3>
+
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Title" ng-model="editedPost.title"></input>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Link" ng-model="editedPost.link"></input>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <button class="btn btn-warning">Cancel</button>
+</form>
+
+<div ng-hide="isLoggedIn()">
+    <h3>You need to <a href="/#/login">Log In</a> or <a href="/#/register">Register</a> before you can add a post.</h3>
+</div>
